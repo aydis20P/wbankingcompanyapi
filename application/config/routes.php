@@ -49,6 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
+$route['v1/cuentas/(:any)/saldo']['get'] = 'v1/cuentas/cuentasaldo/$1';
 $route['ejemplo_get']['get'] = 'welcome/index';
 
 $route['default_controller'] = 'welcome';
