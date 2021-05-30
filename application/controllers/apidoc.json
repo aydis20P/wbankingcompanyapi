@@ -3,5 +3,5 @@
     "version": "0.1.0",
     "description": "Api de la W Banking Company",
     "title": "API | W Banking Company",
-    "url" : "https://wbankingcompany.herokuapp.com/v1"
+    "url" : "https://wbankingcompany.herokuapp.com/index.php/v1"
   }

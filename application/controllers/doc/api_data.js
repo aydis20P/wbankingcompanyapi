@@ -229,6 +229,93 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/cuentas/retiro",
+    "title": "Realizar retiro de una cuenta",
+    "version": "0.1.0",
+    "name": "PostCuentaRetiro",
+    "group": "Cuentas",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID de la cuenta.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "total-retirado",
+            "description": "<p>Total del monto que se retirará de la cuenta.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example:",
+          "content": "{\n  \"idcuenta\": 2,\n  \"total-retirado\": 5000\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "JSON",
+            "optional": false,
+            "field": "saldo",
+            "description": "<p>Información del saldo actualizado de la cuenta en formato JSON.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"idhsaldo\": 9,\n  \"total\": 35000,\n  \"idcuenta\": 2,\n  \"fecha\": \"2021-05-29 11:06:41.851489-05\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "DatosIncorrectos",
+            "description": "<p>Los datos proporcinados son incorrectos.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "FondosInsuficientes",
+            "description": "<p>No hay fondos suficientes para realizar la transacción.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n  \"error\": \"DatosIncorrectos\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Fondos insuficientes\n{\n  \"error\": \"FondosInsuficientes\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "./v1/Cuentas.php",
+    "groupTitle": "Cuentas"
+  },
+  {
+    "type": "post",
     "url": "/transferencias",
     "title": "Registrar transferencia de una cuenta a otra",
     "version": "0.1.0",
@@ -307,7 +394,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "./v1/Trasnferencias.php",
+    "filename": "./v1/Transferencias.php",
     "groupTitle": "Transferencias"
   }
 ] });
