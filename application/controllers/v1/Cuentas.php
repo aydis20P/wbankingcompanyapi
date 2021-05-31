@@ -3,6 +3,11 @@ use chriskacerguis\RestServer\RestController;
 
 class Cuentas extends RestController {
 
+	public function __construct() {
+		parent::__construct();
+		$this->load->model('cuentas_model');
+	}
+
     /**
 	 * @api {get} /cuentas/:numerocuenta Solicitar la información de una cuenta
 	 * @apiVersion 0.1.0
@@ -33,7 +38,13 @@ class Cuentas extends RestController {
 	 */
 	public function index_get($numerocuenta = NULL)
 	{
-		echo "index_get (Cuentas)";
+		$query_cuentas = $this->cuentas_model->getCuenta($numerocuenta);
+        if (!empty($query_cuentas)) {
+            $this->response($query_cuentas, 200);   
+        }
+        else {
+            $this->response("CuentaNoEncontrada", 404);
+        }
 	}
 
 	/**
@@ -63,8 +74,14 @@ class Cuentas extends RestController {
 	 *       "error": "SaldoNoEncontrado"
 	 *     }
 	 */
-    public function cuentaSaldo_get($numerocuenta = NULL){
-		echo "cuentaSaldo_get";
+    public function cuentaSaldo_get($idcuenta = NULL){
+		$query_saldo = $this->cuentas_model->getCuentaSaldo($idcuenta);
+        if (!empty($query_saldo)) {
+            $this->response($query_saldo, 200);   
+        }
+        else {
+            $this->response("SaldoNoEncontrado", 404);
+        }
     }
 
 	/**
