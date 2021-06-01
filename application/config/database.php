@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'williampalacios',
-	'password' => 'Root1428+',
-	'database' => 'wbankingcompany',
+	'hostname' => 'ec2-34-232-191-133.compute-1.amazonaws.com',
+	'username' => 'odqgleatefiqss',
+	'password' => '79ca5777c8455a654dbeee2d50c51975a56d2527b6cd23bb9c93126ba5333112',
+	'database' => 'd8eoqtnmkuge56',
 	'dbdriver' => 'postgre',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
