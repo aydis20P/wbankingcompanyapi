@@ -3,6 +3,11 @@ use chriskacerguis\RestServer\RestController;
 
 class Transferencias extends RestController {
 
+	public function __construct() {
+		parent::__construct();
+		$this->load->model('transferencias_model');
+	}
+
 	public function index_get()
 	{
 		echo "index_get (Transferencias)";
@@ -47,6 +52,20 @@ class Transferencias extends RestController {
 	 */
     public function index_post()
 	{
-		echo "index_post (Transferencias)";
+		if(!empty(file_get_contents('php://input'))){
+            $json_obj = file_get_contents('php://input');
+            $obj = json_decode($json_obj);
+
+            $queryTranferencia = $this->transferencias_model->transferenciaPost($obj->idcuentahabiente, $obj->idbeneficiario, $obj->monto);
+            if (!empty($queryTranferencia)) {
+                $this->response($queryTranferencia, 201); 
+            }
+            else {
+                $this->response("DatosIncorrectos", 400);
+            }
+        }
+        else{
+            $this->response("DatosIncorrectos", 400);
+        }
 	}
 }

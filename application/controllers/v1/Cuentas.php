@@ -38,9 +38,9 @@ class Cuentas extends RestController {
 	 */
 	public function index_get($numerocuenta = NULL)
 	{
-		$query_cuentas = $this->cuentas_model->getCuenta($numerocuenta);
-        if (!empty($query_cuentas)) {
-            $this->response($query_cuentas, 200);   
+		$queryCuentas = $this->cuentas_model->getCuenta($numerocuenta);
+        if (!empty($queryCuentas)) {
+            $this->response($queryCuentas, 200);   
         }
         else {
             $this->response("CuentaNoEncontrada", 404);
@@ -75,9 +75,9 @@ class Cuentas extends RestController {
 	 *     }
 	 */
     public function cuentaSaldo_get($idcuenta = NULL){
-		$query_saldo = $this->cuentas_model->getCuentaSaldo($idcuenta);
-        if (!empty($query_saldo)) {
-            $this->response($query_saldo, 200);   
+		$querySaldo = $this->cuentas_model->getCuentaSaldo($idcuenta);
+        if (!empty($querySaldo)) {
+            $this->response($querySaldo, 200);   
         }
         else {
             $this->response("SaldoNoEncontrado", 404);
@@ -96,13 +96,13 @@ class Cuentas extends RestController {
 	 * @apiParamExample {json} Request-Example:
 	 *     {
 	 *       "idcuenta": 2,
-	 *       "total-depositado": 5000
+	 *       "totalDepositado": 5000
 	 *     }
 	 *
 	 * @apiSuccess {JSON} saldo Información del saldo actualizado de la cuenta en formato JSON.
 	 *
 	 * @apiSuccessExample Success-Response:
-	 *     HTTP/1.1 200 OK
+	 *     HTTP/1.1 201 CREATED
 	 *     {
 	 *       "idhsaldo": 8,
 	 *       "total": 40000,
@@ -119,7 +119,21 @@ class Cuentas extends RestController {
 	 *     }
 	 */
     public function deposito_post(){
-		echo "deposito_post";
+        if(!empty(file_get_contents('php://input'))){
+            $jsonObj = file_get_contents('php://input');
+            $obj = json_decode($jsonObj);
+
+            $queryDeposito = $this->cuentas_model->depositoPost($obj->idcuenta, $obj->totalDepositado);
+            if (!empty($queryDeposito)) {
+                $this->response($queryDeposito, 201); 
+            }
+            else {
+                $this->response("DatosIncorrectos", 400);
+            }
+        }
+        else{
+            $this->response("DatosIncorrectos", 400);
+        }
     }
 
 	/**
@@ -134,13 +148,13 @@ class Cuentas extends RestController {
 	 * @apiParamExample {json} Request-Example:
 	 *     {
 	 *       "idcuenta": 2,
-	 *       "total-retirado": 5000
+	 *       "totalRetirado": 5000
 	 *     }
 	 *
 	 * @apiSuccess {JSON} saldo Información del saldo actualizado de la cuenta en formato JSON.
 	 *
 	 * @apiSuccessExample Success-Response:
-	 *     HTTP/1.1 200 OK
+	 *     HTTP/1.1 201 CREATED
 	 *     {
 	 *       "idhsaldo": 9,
 	 *       "total": 35000,
@@ -165,6 +179,23 @@ class Cuentas extends RestController {
 	 *     }
 	 */
     public function retiro_post(){
-		echo "retiro_post";
+		if(!empty(file_get_contents('php://input'))){
+            $jsonObj = file_get_contents('php://input');
+            $obj = json_decode($jsonObj);
+
+            $queryDeposito = $this->cuentas_model->retiroPost($obj->idcuenta, $obj->totalRetirado);
+			if ($queryDeposito == 0) {
+				$this->response("FondosInsuficientes", 500); 
+			}
+            if (!empty($queryDeposito)) {
+                $this->response($queryDeposito, 201); 
+            }
+            else {
+                $this->response("DatosIncorrectos", 400);
+            }
+        }
+        else{
+            $this->response("DatosIncorrectos", 400);
+        }
     }
 }

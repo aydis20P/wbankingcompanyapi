@@ -2,7 +2,7 @@
 class Cuentas_model extends CI_Model {
 
     public function __construct() {
-            $this->load->database();
+        $this->load->database();
     }
 
     /**
@@ -10,7 +10,7 @@ class Cuentas_model extends CI_Model {
      */
     public function getCuenta($numerocuenta = NULL) {
         if ($numerocuenta === NULL){
-                return array();
+            return array();
         }
 
         $queryStr = "SELECT
@@ -32,9 +32,116 @@ class Cuentas_model extends CI_Model {
      */
     function getCuentaSaldo($idcuenta = NULL){
         if ($idcuenta === NULL){
-                return array();
+            return array();
         }
 
+        $queryStr = "SELECT *
+                    FROM historialsaldos
+                    WHERE
+                    idcuenta = ". $idcuenta ."
+                    AND
+                    fecha =
+                    (SELECT MAX(fecha)
+                    FROM historialsaldos
+                    WHERE idcuenta = ". $idcuenta .");";
+        $query = $this->db->query($queryStr);
+        return $query->row_array();
+    }
+
+    /**
+     * Crea nuevo registro en el historialsaldo asociado a la cuenta
+     * con el saldo más reciente mas el total depositado
+     */
+    function depositoPost($idcuenta, $totalDepositado){
+        if ($idcuenta === NULL || $totalDepositado === NULL){
+            return array();
+        }
+
+        // Consultar el saldo actual
+        $queryStr = "SELECT total
+                    FROM historialsaldos
+                    WHERE
+                    idcuenta = ". $idcuenta ."
+                    AND
+                    fecha =
+                    (SELECT MAX(fecha)
+                    FROM historialsaldos
+                    WHERE idcuenta = ". $idcuenta .");";
+        $totalActual = $this->db->query($queryStr);
+
+        // Parseamos el total actual a float
+        $num = $totalActual->row()->total;
+        $value = floatval(preg_replace('/[^\d\.]+/', '', $num));
+
+        if (gettype($totalDepositado) == "string"){
+            return array();
+        }
+        else{
+            // Sumar el nuevo saldo al saldo actual
+            $nuevoTotal = $value + $totalDepositado;
+        }
+
+        // Registrar el movimiento en historialsaldo
+        $queryStr = "INSERT INTO historialsaldos(total, idcuenta) VALUES (". $nuevoTotal .", ". $idcuenta .");";
+        $this->db->query($queryStr);
+
+        // Regresar nuevo saldo
+        $queryStr = "SELECT *
+                    FROM historialsaldos
+                    WHERE
+                    idcuenta = ". $idcuenta ."
+                    AND
+                    fecha =
+                    (SELECT MAX(fecha)
+                    FROM historialsaldos
+                    WHERE idcuenta = ". $idcuenta .");";
+        $query = $this->db->query($queryStr);
+        return $query->row_array();
+    }
+
+    /**
+     * Crea nuevo registro en el historialsaldo asociado a la cuenta
+     * con el saldo más reciente menos el total retirado
+     */
+    function retiroPost($idcuenta, $totalRetirado){
+        if ($idcuenta === NULL || $totalRetirado === NULL){
+            return array();
+        }
+
+        // Consultar el saldo actual
+        $queryStr = "SELECT total
+                    FROM historialsaldos
+                    WHERE
+                    idcuenta = ". $idcuenta ."
+                    AND
+                    fecha =
+                    (SELECT MAX(fecha)
+                    FROM historialsaldos
+                    WHERE idcuenta = ". $idcuenta .");";
+        $totalActual = $this->db->query($queryStr);
+
+        // Parseamos el total actual a float
+        $num = $totalActual->row()->total;
+        $value = floatval(preg_replace('/[^\d\.]+/', '', $num));
+
+        if (gettype($totalRetirado) == "string"){
+            return array();
+        }
+        else{
+            if ($value >= $totalRetirado) {
+                // Restar el total retirado al saldo actual
+                $nuevoTotal = $value - $totalRetirado;
+            }
+            else{
+                return 0;
+            }
+        }
+
+        // Registrar el movimiento en historialsaldo
+        $queryStr = "INSERT INTO historialsaldos(total, idcuenta) VALUES (". $nuevoTotal .", ". $idcuenta .");";
+        $this->db->query($queryStr);
+
+        // Regresar nuevo saldo
         $queryStr = "SELECT *
                     FROM historialsaldos
                     WHERE
