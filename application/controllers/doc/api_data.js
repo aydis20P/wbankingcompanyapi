@@ -180,7 +180,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n  \"idcuenta\": 2,\n  \"total-depositado\": 5000\n}",
+          "content": "{\n  \"idcuenta\": 2,\n  \"totalDepositado\": 5000\n}",
           "type": "json"
         }
       ]
@@ -200,7 +200,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"idhsaldo\": 8,\n  \"total\": 40000,\n  \"idcuenta\": 2,\n  \"fecha\": \"2021-05-29 11:06:41.851489-05\"\n}",
+          "content": "HTTP/1.1 201 CREATED\n{\n  \"idhsaldo\": 8,\n  \"total\": 40000,\n  \"idcuenta\": 2,\n  \"fecha\": \"2021-05-29 11:06:41.851489-05\"\n}",
           "type": "json"
         }
       ]
@@ -256,7 +256,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Request-Example:",
-          "content": "{\n  \"idcuenta\": 2,\n  \"total-retirado\": 5000\n}",
+          "content": "{\n  \"idcuenta\": 2,\n  \"totalRetirado\": 5000\n}",
           "type": "json"
         }
       ]
@@ -276,7 +276,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"idhsaldo\": 9,\n  \"total\": 35000,\n  \"idcuenta\": 2,\n  \"fecha\": \"2021-05-29 11:06:41.851489-05\"\n}",
+          "content": "HTTP/1.1 201 CREATED\n{\n  \"idhsaldo\": 9,\n  \"total\": 35000,\n  \"idcuenta\": 2,\n  \"fecha\": \"2021-05-29 11:06:41.851489-05\"\n}",
           "type": "json"
         }
       ]
