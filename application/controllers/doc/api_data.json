@@ -87,7 +87,12 @@
       ]
     },
     "filename": "./v1/Cuentas.php",
-    "groupTitle": "Cuentas"
+    "groupTitle": "Cuentas",
+    "sampleRequest": [
+      {
+        "url": "https://wbankingcompany.herokuapp.com/index.php/v1/cuentas/:numerocuenta"
+      }
+    ]
   },
   {
     "type": "get",
@@ -149,7 +154,12 @@
       ]
     },
     "filename": "./v1/Cuentas.php",
-    "groupTitle": "Cuentas"
+    "groupTitle": "Cuentas",
+    "sampleRequest": [
+      {
+        "url": "https://wbankingcompany.herokuapp.com/index.php/v1/cuentas/:id/saldo"
+      }
+    ]
   },
   {
     "type": "post",
@@ -225,7 +235,12 @@
       ]
     },
     "filename": "./v1/Cuentas.php",
-    "groupTitle": "Cuentas"
+    "groupTitle": "Cuentas",
+    "sampleRequest": [
+      {
+        "url": "https://wbankingcompany.herokuapp.com/index.php/v1/cuentas/deposito"
+      }
+    ]
   },
   {
     "type": "post",
@@ -312,7 +327,12 @@
       ]
     },
     "filename": "./v1/Cuentas.php",
-    "groupTitle": "Cuentas"
+    "groupTitle": "Cuentas",
+    "sampleRequest": [
+      {
+        "url": "https://wbankingcompany.herokuapp.com/index.php/v1/cuentas/retiro"
+      }
+    ]
   },
   {
     "type": "post",
@@ -395,6 +415,11 @@
       ]
     },
     "filename": "./v1/Transferencias.php",
-    "groupTitle": "Transferencias"
+    "groupTitle": "Transferencias",
+    "sampleRequest": [
+      {
+        "url": "https://wbankingcompany.herokuapp.com/index.php/v1/transferencias"
+      }
+    ]
   }
 ]
