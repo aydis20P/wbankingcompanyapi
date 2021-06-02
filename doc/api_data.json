@@ -1,4 +1,4 @@
-define({ "api": [
+[
   {
     "success": {
       "fields": {
@@ -22,7 +22,7 @@ define({ "api": [
     "type": "",
     "url": "",
     "version": "0.0.0",
-    "filename": "./doc/main.js",
+    "filename": "application/controllers/doc/main.js",
     "group": "/Users/williampalacios/Development/wbankingcompanyapi/application/controllers/doc/main.js",
     "groupTitle": "/Users/williampalacios/Development/wbankingcompanyapi/application/controllers/doc/main.js",
     "name": ""
@@ -86,7 +86,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "./v1/Cuentas.php",
+    "filename": "application/controllers/v1/Cuentas.php",
     "groupTitle": "Cuentas",
     "sampleRequest": [
       {
@@ -153,7 +153,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "./v1/Cuentas.php",
+    "filename": "application/controllers/v1/Cuentas.php",
     "groupTitle": "Cuentas",
     "sampleRequest": [
       {
@@ -234,7 +234,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "./v1/Cuentas.php",
+    "filename": "application/controllers/v1/Cuentas.php",
     "groupTitle": "Cuentas",
     "sampleRequest": [
       {
@@ -326,7 +326,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "./v1/Cuentas.php",
+    "filename": "application/controllers/v1/Cuentas.php",
     "groupTitle": "Cuentas",
     "sampleRequest": [
       {
@@ -414,7 +414,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "./v1/Transferencias.php",
+    "filename": "application/controllers/v1/Transferencias.php",
     "groupTitle": "Transferencias",
     "sampleRequest": [
       {
@@ -422,4 +422,4 @@ define({ "api": [
       }
     ]
   }
-] });
+]
