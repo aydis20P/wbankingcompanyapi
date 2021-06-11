@@ -77,8 +77,14 @@ class Cuentas_model extends CI_Model {
             return array();
         }
         else{
-            // Sumar el nuevo saldo al saldo actual
-            $nuevoTotal = $value + $totalDepositado;
+            // Verificar que el total depositado sea >= 50
+            if($totalDepositado >= 50){
+                // Sumar el nuevo saldo al saldo actual
+                $nuevoTotal = $value + $totalDepositado;
+            }
+            else{
+                return array();
+            }
         }
 
         // Registrar el movimiento en historialsaldo
@@ -128,7 +134,7 @@ class Cuentas_model extends CI_Model {
             return array();
         }
         else{
-            if ($value >= $totalRetirado) {
+            if ($value >= $totalRetirado && $totalRetirado >= 50) {
                 // Restar el total retirado al saldo actual
                 $nuevoTotal = $value - $totalRetirado;
             }

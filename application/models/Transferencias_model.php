@@ -18,17 +18,23 @@ class Transferencias_model extends CI_Model {
             return array();
         }
         else{
-            // Registrar la transferencia
-            $queryStr = "INSERT INTO transferencias(cuentahabiente, beneficiario, monto)
-                        VALUES ('" . $idcuentahabiente . "', '". $idbeneficiario . "', '" . $monto . "');";
-            $this->db->query($queryStr);
+            // Verificar que el monto sea >= 50
+            if($monto >= 50){
+                // Registrar la transferencia
+                $queryStr = "INSERT INTO transferencias(cuentahabiente, beneficiario, monto)
+                            VALUES ('" . $idcuentahabiente . "', '". $idbeneficiario . "', '" . $monto . "');";
+                $this->db->query($queryStr);
 
-            $money = "$".strval($monto);
-            // Regresar la transferencia
-            $query = $this->db->get_where('transferencias', array('cuentahabiente' => $idcuentahabiente,
-                                                                  'beneficiario' => $idbeneficiario,
-                                                                  'monto' => $money));
-            return $query->result_array()[0];
-        }        
+                $money = "$".strval($monto);
+                // Regresar la transferencia
+                $query = $this->db->get_where('transferencias', array('cuentahabiente' => $idcuentahabiente,
+                                                                      'beneficiario' => $idbeneficiario,
+                                                                      'monto' => $money));
+                return $query->result_array()[0];
+            }
+            else{
+                return array();
+            }
+        }
     }
 }
