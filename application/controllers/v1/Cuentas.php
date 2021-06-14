@@ -3,8 +3,8 @@ use chriskacerguis\RestServer\RestController;
 
 class Cuentas extends RestController {
 
-	public function __construct($config = 'rest') {
-		parent::__construct($config);
+	public function __construct() {
+		parent::__construct();
 		$this->load->model('cuentas_model');
 	}
 
