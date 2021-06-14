@@ -5,7 +5,7 @@ class Cuentas extends RestController {
 
 	public function __construct($config = 'rest') {
 		parent::__construct($config);
-        header('Access-Control-Allow-Origin: https://wbcatm.herokuapp.com');
+        header('Access-Control-Allow-Origin: "https://wbcatm.herokuapp.com"');
         header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
         $method = $_SERVER['REQUEST_METHOD'];
