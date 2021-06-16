@@ -6,7 +6,18 @@ class Cuentas extends RestController {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('cuentas_model');
+        $this->load->helper('jwtcheck');
 	}
+
+    public function validateAccess(){
+        try{
+            jwtValidation();
+        }
+        catch(Exception $e){
+            $this->response($e->getMessage(), 400);
+            return;
+        }
+    }
 
     /**
 	 * @api {get} /cuentas/:numerocuenta Solicitar la información de una cuenta
@@ -40,12 +51,27 @@ class Cuentas extends RestController {
 	{
 		$queryCuentas = $this->cuentas_model->getCuenta($numerocuenta);
         if (!empty($queryCuentas)) {
-            $this->response($queryCuentas, 200);   
+            $this->response($queryCuentas, 200);
         }
         else {
             $this->response("CuentaNoEncontrada", 404);
         }
 	}
+
+
+	public function info_get($numerocuenta = NULL)
+	{
+		$queryCuentas = $this->cuentas_model->getCuenta($numerocuenta);
+        if (!empty($queryCuentas)) {
+            $this->response(array('nombre' => $queryCuentas['nombre'],
+                                  'numeroCuenta' => $queryCuentas['numerocuenta']),
+                            200);
+        }
+        else {
+            $this->response("CuentaNoEncontrada", 404);
+        }
+	}
+
 
 	/**
 	 * @api {get} /cuentas/:id/saldo Solicitar el saldo de una cuenta
@@ -75,9 +101,11 @@ class Cuentas extends RestController {
 	 *     }
 	 */
     public function cuentaSaldo_get($idcuenta = NULL){
+        $this->validateAccess();
+
 		$querySaldo = $this->cuentas_model->getCuentaSaldo($idcuenta);
         if (!empty($querySaldo)) {
-            $this->response($querySaldo, 200);   
+            $this->response($querySaldo, 200);
         }
         else {
             $this->response("SaldoNoEncontrado", 404);
@@ -92,7 +120,7 @@ class Cuentas extends RestController {
 	 *
 	 * @apiParam {Number} id ID de la cuenta.
 	 * @apiParam {Number} total-depositado Total del monto que se depositará a la cuenta.
-	 * 
+	 *
 	 * @apiParamExample {json} Request-Example:
 	 *     {
 	 *       "idcuenta": 2,
@@ -125,7 +153,7 @@ class Cuentas extends RestController {
 
             $queryDeposito = $this->cuentas_model->depositoPost($obj->idcuenta, $obj->totalDepositado);
             if (!empty($queryDeposito)) {
-                $this->response($queryDeposito, 201); 
+                $this->response($queryDeposito, 201);
             }
             else {
                 $this->response("DatosIncorrectos", 400);
@@ -144,7 +172,7 @@ class Cuentas extends RestController {
 	 *
 	 * @apiParam {Number} id ID de la cuenta.
 	 * @apiParam {Number} total-retirado Total del monto que se retirará de la cuenta.
-	 * 
+	 *
 	 * @apiParamExample {json} Request-Example:
 	 *     {
 	 *       "idcuenta": 2,
@@ -169,9 +197,9 @@ class Cuentas extends RestController {
 	 *     {
 	 *       "error": "DatosIncorrectos"
 	 *     }
-	 * 
+	 *
 	 * @apiError FondosInsuficientes No hay fondos suficientes para realizar la transacción.
-	 * 
+	 *
 	 * @apiErrorExample Error-Response:
 	 *     HTTP/1.1 500 Fondos insuficientes
 	 *     {
@@ -185,10 +213,10 @@ class Cuentas extends RestController {
 
             $queryDeposito = $this->cuentas_model->retiroPost($obj->idcuenta, $obj->totalRetirado);
 			if ($queryDeposito == 0) {
-				$this->response("FondosInsuficientes", 500); 
+				$this->response("FondosInsuficientes", 500);
 			}
             if (!empty($queryDeposito)) {
-                $this->response($queryDeposito, 201); 
+                $this->response($queryDeposito, 201);
             }
             else {
                 $this->response("DatosIncorrectos", 400);
