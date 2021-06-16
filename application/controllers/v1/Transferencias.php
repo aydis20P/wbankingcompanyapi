@@ -6,7 +6,19 @@ class Transferencias extends RestController {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('transferencias_model');
+	    $this->load->helper('jwtcheck');
 	}
+
+    public function validateAccess(){
+        try{
+            jwtValidation();
+        }
+        catch(Exception $e){
+            $this->response($e->getMessage(), 400);
+            return;
+        }
+    }
+
 
 	public function index_get()
 	{
@@ -22,7 +34,7 @@ class Transferencias extends RestController {
 	 * @apiParam {Number} idcuentahabiente ID de la cuenta de quien realiza la transferencia.
 	 * @apiParam {Number} idbeneficiario ID de la cuenta de quien recibe la transferencia.
 	 * @apiParam {Number} monto Monto total que se tranfiere de una cuenta a otra.
-	 * 
+	 *
 	 * @apiParamExample {json} Request-Example:
 	 *     {
 	 *       "idcuentahabiente": 1,
@@ -50,15 +62,16 @@ class Transferencias extends RestController {
 	 *       "error": "DatosIncorrectos"
 	 *     }
 	 */
-    public function index_post()
-	{
+    public function index_post(){
+        $this->validateAccess();
+
 		if(!empty(file_get_contents('php://input'))){
             $json_obj = file_get_contents('php://input');
             $obj = json_decode($json_obj);
 
             $queryTranferencia = $this->transferencias_model->transferenciaPost($obj->idcuentahabiente, $obj->idbeneficiario, $obj->monto);
             if (!empty($queryTranferencia)) {
-                $this->response($queryTranferencia, 201); 
+                $this->response($queryTranferencia, 201);
             }
             else {
                 $this->response("DatosIncorrectos", 400);

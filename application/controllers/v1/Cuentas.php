@@ -47,8 +47,9 @@ class Cuentas extends RestController {
 	 *       "error": "CuentaNoEncontrada"
 	 *     }
 	 */
-	public function index_get($numerocuenta = NULL)
-	{
+	public function index_get($numerocuenta = NULL){
+        $this->validateAccess();
+
 		$queryCuentas = $this->cuentas_model->getCuenta($numerocuenta);
         if (!empty($queryCuentas)) {
             $this->response($queryCuentas, 200);
@@ -64,7 +65,7 @@ class Cuentas extends RestController {
 		$queryCuentas = $this->cuentas_model->getCuenta($numerocuenta);
         if (!empty($queryCuentas)) {
             $this->response(array('nombre' => $queryCuentas['nombre'],
-                                  'numeroCuenta' => $queryCuentas['numerocuenta']),
+                                  'numerocuenta' => $queryCuentas['numerocuenta']),
                             200);
         }
         else {
@@ -147,6 +148,8 @@ class Cuentas extends RestController {
 	 *     }
 	 */
     public function deposito_post(){
+        $this->validateAccess();
+
         if(!empty(file_get_contents('php://input'))){
             $jsonObj = file_get_contents('php://input');
             $obj = json_decode($jsonObj);
@@ -207,6 +210,8 @@ class Cuentas extends RestController {
 	 *     }
 	 */
     public function retiro_post(){
+        $this->validateAccess();
+
 		if(!empty(file_get_contents('php://input'))){
             $jsonObj = file_get_contents('php://input');
             $obj = json_decode($jsonObj);
