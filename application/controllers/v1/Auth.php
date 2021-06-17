@@ -20,7 +20,9 @@ class Auth extends RestController {
             $nip = $queryCuentas['nip'];
 
             //verificar que se pasó la keyword de sitio y que las credenciales del usuario son corractas
-            if($obj->client == 'wbcatm'
+            $aSites = getenv('ALLOWED_SITES');
+            $arrSites = json_decode($aSites);
+            if(in_array($obj->client, $arrSites)
                && $obj->nip == $nip){
                 //generar jwt
                 $time = time();
