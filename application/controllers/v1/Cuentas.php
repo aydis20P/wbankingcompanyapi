@@ -24,7 +24,13 @@ class Cuentas extends RestController {
 	 * @apiVersion 0.1.0
 	 * @apiName GetCuenta
 	 * @apiGroup Cuentas
-	 *
+     *
+     * @apiHeader {String} jwt json web token.
+     * @apiHeaderExample {String} Header-Example:
+     *
+     *  "Authorization: Bearer XXXX.YYYYY.ZZZZZ"
+     *
+     *
 	 * @apiParam {String} numerocuenta Número de cuenta de la cuenta solicitada.
 	 *
 	 * @apiSuccess {JSON} cuenta Información de la cuenta en formato JSON.
@@ -59,7 +65,31 @@ class Cuentas extends RestController {
         }
 	}
 
-
+    /**
+	 * @api {get} /cuentas/info/:numerocuenta Solicitar la información básica de una cuenta
+	 * @apiVersion 0.1.0
+	 * @apiName GetCuentaInfo
+	 * @apiGroup Cuentas
+	 *
+	 * @apiParam {String} numerocuenta Número de cuenta de la cuenta solicitada.
+	 *
+	 * @apiSuccess {JSON} cuenta Información de básica la cuenta en formato JSON.
+	 *
+	 * @apiSuccessExample Success-Response:
+	 *     HTTP/1.1 200 OK
+	 *     {
+     *       "nombre": William
+	 *       "numerocuenta": "1234567812345678",
+	 *     }
+	 *
+	 * @apiError CuentaNoEncontrada La cuenta solicitada no fue encontrada.
+	 *
+	 * @apiErrorExample Error-Response:
+	 *     HTTP/1.1 404 Not Found
+	 *     {
+	 *       "error": "CuentaNoEncontrada"
+	 *     }
+	 */
 	public function info_get($numerocuenta = NULL)
 	{
 		$queryCuentas = $this->cuentas_model->getCuenta($numerocuenta);
@@ -72,7 +102,6 @@ class Cuentas extends RestController {
             $this->response("CuentaNoEncontrada", 404);
         }
 	}
-
 
 	/**
 	 * @api {get} /cuentas/:id/saldo Solicitar el saldo de una cuenta
