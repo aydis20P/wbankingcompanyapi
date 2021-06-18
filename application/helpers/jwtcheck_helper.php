@@ -38,6 +38,7 @@ function getBearerToken() {
 
 function validateToken($jwt) {
 
+    echo $jwt;
     $key = getenv('KEY');
     try{
         $data = JWT::decode($jwt, $key, array('HS256'));
