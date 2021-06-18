@@ -209,7 +209,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"nombre\": William\n  \"numerocuenta\": \"1234567812345678\",\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"nombre\": \"William\",\n  \"numerocuenta\": 1234567812345678\n}",
           "type": "json"
         }
       ]
@@ -248,6 +248,26 @@
     "version": "0.1.0",
     "name": "GetCuentaSaldo",
     "group": "Cuentas",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>json web token (Bearer).</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "\nBearer XXXX.YYYYY.ZZZZZ",
+          "type": "String"
+        }
+      ]
+    },
     "parameter": {
       "fields": {
         "Parameter": [
@@ -315,6 +335,26 @@
     "version": "0.1.0",
     "name": "PostCuentaDeposito",
     "group": "Cuentas",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>json web token (Bearer).</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "\nBearer XXXX.YYYYY.ZZZZZ",
+          "type": "String"
+        }
+      ]
+    },
     "parameter": {
       "fields": {
         "Parameter": [
@@ -396,6 +436,26 @@
     "version": "0.1.0",
     "name": "PostCuentaRetiro",
     "group": "Cuentas",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>json web token (Bearer).</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "\nBearer XXXX.YYYYY.ZZZZZ",
+          "type": "String"
+        }
+      ]
+    },
     "parameter": {
       "fields": {
         "Parameter": [
@@ -488,6 +548,26 @@
     "version": "0.1.0",
     "name": "PostTransferencias",
     "group": "Transferencias",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>json web token (Bearer).</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "\nBearer XXXX.YYYYY.ZZZZZ",
+          "type": "String"
+        }
+      ]
+    },
     "parameter": {
       "fields": {
         "Parameter": [

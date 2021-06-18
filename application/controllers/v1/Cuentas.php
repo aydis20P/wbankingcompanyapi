@@ -78,8 +78,8 @@ class Cuentas extends RestController {
 	 * @apiSuccessExample Success-Response:
 	 *     HTTP/1.1 200 OK
 	 *     {
-     *       "nombre": William
-	 *       "numerocuenta": "1234567812345678",
+     *       "nombre": "William",
+	 *       "numerocuenta": 1234567812345678
 	 *     }
 	 *
 	 * @apiError CuentaNoEncontrada La cuenta solicitada no fue encontrada.
@@ -109,6 +109,11 @@ class Cuentas extends RestController {
 	 * @apiName GetCuentaSaldo
 	 * @apiGroup Cuentas
 	 *
+     * @apiHeader {String} Authorization json web token (Bearer).
+     * @apiHeaderExample {String} Header-Example:
+     *
+     *  Bearer XXXX.YYYYY.ZZZZZ
+     *
 	 * @apiParam {Number} id ID de la cuenta solicitada.
 	 *
 	 * @apiSuccess {JSON} saldo Información del saldo de la cuenta en formato JSON.
@@ -148,6 +153,11 @@ class Cuentas extends RestController {
 	 * @apiName PostCuentaDeposito
 	 * @apiGroup Cuentas
 	 *
+     * @apiHeader {String} Authorization json web token (Bearer).
+     * @apiHeaderExample {String} Header-Example:
+     *
+     *  Bearer XXXX.YYYYY.ZZZZZ
+     *
 	 * @apiParam {Number} id ID de la cuenta.
 	 * @apiParam {Number} total-depositado Total del monto que se depositará a la cuenta.
 	 *
@@ -202,6 +212,11 @@ class Cuentas extends RestController {
 	 * @apiName PostCuentaRetiro
 	 * @apiGroup Cuentas
 	 *
+     * @apiHeader {String} Authorization json web token (Bearer).
+     * @apiHeaderExample {String} Header-Example:
+     *
+     *  Bearer XXXX.YYYYY.ZZZZZ
+     *
 	 * @apiParam {Number} id ID de la cuenta.
 	 * @apiParam {Number} total-retirado Total del monto que se retirará de la cuenta.
 	 *

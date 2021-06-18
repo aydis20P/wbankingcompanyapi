@@ -31,7 +31,12 @@ class Transferencias extends RestController {
 	 * @apiName PostTransferencias
 	 * @apiGroup Transferencias
 	 *
-	 * @apiParam {Number} idcuentahabiente ID de la cuenta de quien realiza la transferencia.
+     * @apiHeader {String} Authorization json web token (Bearer).
+     * @apiHeaderExample {String} Header-Example:
+     *
+     *  Bearer XXXX.YYYYY.ZZZZZ
+     *
+     * @apiParam {Number} idcuentahabiente ID de la cuenta de quien realiza la transferencia.
 	 * @apiParam {Number} idbeneficiario ID de la cuenta de quien recibe la transferencia.
 	 * @apiParam {Number} monto Monto total que se tranfiere de una cuenta a otra.
 	 *
