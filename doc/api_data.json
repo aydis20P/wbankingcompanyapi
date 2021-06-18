@@ -101,15 +101,15 @@
             "group": "Header",
             "type": "String",
             "optional": false,
-            "field": "jwt",
-            "description": "<p>json web token.</p>"
+            "field": "Authorization",
+            "description": "<p>json web token (Bearer).</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Header-Example:",
-          "content": "\n\"Authorization: Bearer XXXX.YYYYY.ZZZZZ\"",
+          "content": "\nBearer XXXX.YYYYY.ZZZZZ",
           "type": "String"
         }
       ]
@@ -382,87 +382,6 @@
       ]
     },
     "filename": "application/controllers/v1/Cuentas.php",
-    "groupTitle": "Cuentas",
-    "sampleRequest": [
-      {
-        "url": "https://wbankingcompany.herokuapp.com/index.php/v1/cuentas/deposito"
-      }
-    ]
-  },
-  {
-    "type": "post",
-    "url": "/cuentas/deposito",
-    "title": "Realizar deposito a una cuenta",
-    "version": "0.1.0",
-    "name": "PostCuentaDeposito",
-    "group": "Cuentas",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>ID de la cuenta.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "total-depositado",
-            "description": "<p>Total del monto que se depositará a la cuenta.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Example:",
-          "content": "{\n  \"idcuenta\": 2,\n  \"totalDepositado\": 5000\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "JSON",
-            "optional": false,
-            "field": "saldo",
-            "description": "<p>Información del saldo actualizado de la cuenta en formato JSON.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 201 CREATED\n{\n  \"idhsaldo\": 8,\n  \"total\": 40000,\n  \"idcuenta\": 2,\n  \"fecha\": \"2021-05-29 11:06:41.851489-05\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "DatosIncorrectos",
-            "description": "<p>Los datos proporcinados son incorrectos.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 400 Bad Request\n{\n  \"error\": \"DatosIncorrectos\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "application/controllers/v1/postDoc.php",
     "groupTitle": "Cuentas",
     "sampleRequest": [
       {

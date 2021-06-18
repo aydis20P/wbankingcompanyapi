@@ -25,10 +25,10 @@ class Cuentas extends RestController {
 	 * @apiName GetCuenta
 	 * @apiGroup Cuentas
      *
-     * @apiHeader {String} jwt json web token.
+     * @apiHeader {String} Authorization json web token (Bearer).
      * @apiHeaderExample {String} Header-Example:
      *
-     *  "Authorization: Bearer XXXX.YYYYY.ZZZZZ"
+     *  Bearer XXXX.YYYYY.ZZZZZ
      *
      *
 	 * @apiParam {String} numerocuenta Número de cuenta de la cuenta solicitada.
