@@ -9,6 +9,39 @@ class Auth extends RestController {
 		$this->load->model('cuentas_model');
 	}
 
+	/**
+	 * @api {post} /auth Solicitar autorización para consumir la API
+	 * @apiVersion 0.1.0
+	 * @apiName PostAuth
+	 * @apiGroup Autorización
+	 *
+	 * @apiParam {Number} numerocuenta Numero de ceunta del cuentahabiente.
+	 * @apiParam {Number} nip Nip del cuentahabiente.
+     * @apiParam {String} cliente Llave única del cliente que consumirá la API.
+	 *
+	 * @apiParamExample {json} Request-Example:
+	 *     {
+	 *       "numerocuenta": 1234567812345678,
+	 *       "nip": 1234,
+	 *       "client": "client_example"
+	 *     }
+	 *
+	 * @apiSuccess {JSON} jwt jwt en formato JSON.
+	 *
+	 * @apiSuccessExample Success-Response:
+	 *     HTTP/1.1 200 OK
+	 *     {
+	 *       "jwt": "XXXX.YYYYYY.ZZZZZZZ"
+	 *     }
+	 *
+	 * @apiError NoAutorizado Acceso denegado.
+	 *
+	 * @apiErrorExample Error-Response:
+	 *     HTTP/1.1 400 Bad Request
+	 *     {
+	 *       "error": "NoAutorizado"
+	 *     }
+	 */
     public function index_post(){
         if(!empty(file_get_contents('php://input'))){
             //obtener el contenido pasado en el body
